@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .column {
+        display: flex; /* Use flexbox to create a flexible layout */
+        flex-wrap: wrap; /* Wrap items onto the next line when they don't fit */
+        justify-content: space-between; /* Distribute items evenly along the main axis */
+    }
+
+    .menu-item {
+        width: calc(50% - 10px); /* Set width of each item to 50% minus some spacing */
+        margin-bottom: 20px; /* Add some margin between items */
+    }
+
+    .menu-price {
+        display: block; /* Ensure price is displayed on a new line */
+    }
+</style>
+<h1>Menu</h1>
+<!--Begin col-->
+<div class="column">
+    
+    {% for item in menu.menu %}
+    <p>
+        <a href="{% url 'menu_item' pk=item.pk %}">
+            {{ item.title }}
+            </a>
+        <span class="menu-price">
+            ${{ item.price }}.00
+        </span>
+        <img src="{% static 'img/menu_items/'|add:item.title %}.jpg"  />
+        
+    </p>
+    {% endfor %}
+</div>
+<!--End col-->
+{% endblock %}
