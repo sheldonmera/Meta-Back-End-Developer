@@ -1,22 +1,20 @@
 from rest_framework import serializers
-from .models import MenuItem, Category
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
+from .models import Menu, Booking
 
 
-class MenuItemSerializer(serializers.ModelSerializer):
+
+class MenuSerializer(serializers.ModelSerializer):
 
     class Meta():
-        model = MenuItem
+        model = Menu
         fields = ['id','title','price','featured','category']
         depth = 1
+        
+class BookingSerializer(serializers.ModelSerializer):
 
-class CategorySerializer(serializers.ModelSerializer):
     class Meta():
-        model = Category
-        fields = ['slug']
+        model = Booking
+        fields = ['id','first_name','reservation_date','reservation_slot',]
+        depth = 1
 
-class SingleHelperSerializer(serializers.ModelSerializer):
-    class Meta():
-        model = MenuItem
-        fields = ['title','price']
+

@@ -12,9 +12,8 @@ urlpatterns = [
     path('bookings', views.bookings, name='bookings'), 
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
-    path('menu-items', views.MenuItemListView.as_view()),
-    path('menu-items/category', views.CategoryView.as_view()),
-    path('menu-items/<int:pk>', views.MenuItemDetailView.as_view()),
+    path('menu-items', views.MenuListView.as_view()),
+    path('menu-items/<int:pk>', views.MenuDetailView.as_view()),
     
     
 ]

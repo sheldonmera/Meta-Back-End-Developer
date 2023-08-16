@@ -1,40 +1,29 @@
 from django.shortcuts import render
 from django.core import serializers
-from django.contrib.auth.models import User, Group
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import get_object_or_404
-from django.http import  HttpResponseBadRequest,JsonResponse
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework import generics
 from datetime import datetime
 from .forms import BookingForm
-from .models import MenuItem, Category,Booking
-from .serializers import MenuItemSerializer, CategorySerializer
+from .models import Menu,Booking
+from .serializers import MenuSerializer
 from .paginations import MenuItemListPagination
-from .permissions import IsManager, IsDeliveryCrew
 import json
 
 # Create your views here.
-class MenuItemListView(generics.ListCreateAPIView):
+class MenuListView(generics.ListCreateAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
-    queryset = MenuItem.objects.all()
-    serializer_class = MenuItemSerializer
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
     search_fields = ['title','category__title']
     ordering_fields=['price','category']
     pagination_class = MenuItemListPagination
-    
-class CategoryView(generics.ListCreateAPIView):
-    throttle_classes = [AnonRateThrottle, UserRateThrottle]
-    serializer_class = CategorySerializer
-    queryset = Category.objects.all()
-    permission_classes = [IsAdminUser]
 
-class MenuItemDetailView(generics.RetrieveUpdateDestroyAPIView):
+class MenuDetailView(generics.RetrieveUpdateDestroyAPIView):
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
-    queryset = MenuItem.objects.all()
-    serializer_class = MenuItemSerializer
+    queryset = Menu.objects.all()
+    serializer_class = MenuSerializer
 
 
 def home(request):
@@ -58,16 +47,15 @@ def book(request):
     context = {'form':form}
     return render(request, 'book.html', context)
 
-# Add your code here to create new views
 def menu(request):
-    menu_data = MenuItem.objects.all()
+    menu_data = Menu.objects.all()
     main_data = {"menu": menu_data}
     return render(request, 'menu.html', {"menu": main_data})
 
 
 def display_menu_item(request, pk=None): 
     if pk: 
-        menu_item = MenuItem.objects.get(pk=pk) 
+        menu_item = Menu.objects.get(pk=pk) 
     else: 
         menu_item = "" 
     return render(request, 'menu_item.html', {"menu_item": menu_item}) 

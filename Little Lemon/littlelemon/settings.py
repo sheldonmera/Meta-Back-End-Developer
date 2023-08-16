@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # The settings for app updated for the Graded assessment
     'restaurant',
     'rest_framework',
     'djoser',
@@ -60,7 +59,6 @@ ROOT_URLCONF = 'littlelemon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # The settings for templates updated for the Graded assessment
         'DIRS': ['restaurant/templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,8 +75,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'littlelemon.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -88,23 +84,12 @@ DATABASES = {
         'PORT' : '3306',
         'PASSWORD': 'admin@little',
         'USER': 'adminlittle',
-        #'USER' : 'root',
-       #'PASSWORD' : 'root@123',
-    
-    #  'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'reservations',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '3306',
-    #     'USER': 'admindjango',
-    #     'PASSWORD': 'employee@123!',
 }
     }
 
 # The settings for media files have been updated for the Graded assessment
 MEDIA_URL = '/media/'
 
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -122,9 +107,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -133,19 +115,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-# The settings for static files have been updated for the Graded assessment
 STATIC_URL = 'restaurant/static/'
 
 STATICFILES_DIRS = [
     "restaurant/static",
 ]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -154,7 +129,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        #'rest_framework_xml.renderers.XMLRenderer',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
